@@ -45,7 +45,7 @@ const CourseTab = () => {
   const { data: courseByIdData, isLoading: courseByIdLoading , refetch} =
     useGetCourseByIdQuery(courseId);
 
-    const [publishCourse, {}] = usePublishCourseMutation();
+    const [publishCourse] = usePublishCourseMutation();
  
   useEffect(() => {
     if (courseByIdData?.course) { 
@@ -146,7 +146,7 @@ const CourseTab = () => {
       <CardContent>
         <div className="space-y-4 mt-5">
           <div>
-            <Label>Title</Label>
+            <Label className="my-2">Title</Label>
             <Input
               type="text"
               name="courseTitle"
@@ -156,7 +156,7 @@ const CourseTab = () => {
             />
           </div>
           <div>
-            <Label>Subtitle</Label>
+            <Label className="my-2">Subtitle</Label>
             <Input
               type="text"
               name="subTitle"
@@ -166,12 +166,12 @@ const CourseTab = () => {
             />
           </div>
           <div>
-            <Label>Description</Label>
+            <Label className="my-2">Description</Label>
             <RichTextEditor input={input} setInput={setInput} editor={editor}/>
           </div>
           <div className="flex items-center gap-5">
             <div>
-              <Label>Category</Label>
+              <Label className="my-2">Category</Label>
               <Select
                 defaultValue={input.category}
                 onValueChange={selectCategory}
@@ -203,7 +203,7 @@ const CourseTab = () => {
               </Select>
             </div>
             <div>
-              <Label>Course Level</Label>
+              <Label className="my-2">Course Level</Label>
               <Select
                 defaultValue={input.courseLevel}
                 onValueChange={selectCourseLevel}
@@ -222,7 +222,7 @@ const CourseTab = () => {
               </Select>
             </div>
             <div>
-              <Label>Price in (INR)</Label>
+              <Label className="my-2">Price in (INR)</Label>
               <Input
                 type="number"
                 name="coursePrice"
@@ -234,7 +234,7 @@ const CourseTab = () => {
             </div>
           </div>
           <div>
-            <Label>Course Thumbnail</Label>
+            <Label className="my-2">Course Thumbnail</Label>
             <Input
               type="file"
               onChange={selectThumbnail}
@@ -253,7 +253,7 @@ const CourseTab = () => {
             <Button onClick={() => navigate("/admin/course")} variant="outline">
               Cancel
             </Button>
-            <Button disabled={isLoading} onClick={updateCourseHandler}>
+            <Button disabled={isLoading} onClick={updateCourseHandler} className="mx-2">
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

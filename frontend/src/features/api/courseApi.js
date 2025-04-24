@@ -4,7 +4,7 @@ const COURSE_API = `${import.meta.env.VITE_BACKEND_BASEURL}/api/v1/course`;
 
 export const courseApi = createApi({
     reducerPath: "courseApi",
-    tagTypes: ['Refetch_Creator_Course'],
+    tagTypes: ['Refetch_Creator_Course' , 'Refetch_Lecture'],
     baseQuery: fetchBaseQuery({
        baseUrl: COURSE_API,
        credentials: 'include'
@@ -22,7 +22,7 @@ export const courseApi = createApi({
 
           getSearchCourse:builder.query({
             query: ({searchQuery, categories, sortByPrice}) => {
-              // Build qiery string
+              // Build query string
               let queryString = `/search?query=${encodeURIComponent(searchQuery)}`
       
               // append cateogry 

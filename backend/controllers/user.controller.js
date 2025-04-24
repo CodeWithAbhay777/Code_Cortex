@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 export const register = async (req,res) => {
     try {
         
-        const {name, email, password} = req.body; // patel214
+        const {name, email, password} = req.body; 
         if(!name || !email || !password){
             return res.status(400).json({
                 success:false,
@@ -87,12 +87,12 @@ export const logout = async (_,res) => {
     }
 }
 
-//.populate("enrolledCourses");
+
 
 export const getUserProfile = async (req,res) => {
     try {
         const userId = req.id;
-        const user = await User.findById(userId).select("-password")
+        const user = await User.findById(userId).select("-password").populate("enrolledCourses");
         
         if(!user){
             return res.status(404).json({
