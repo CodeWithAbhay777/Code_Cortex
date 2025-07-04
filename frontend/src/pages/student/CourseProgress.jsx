@@ -15,7 +15,10 @@ import { toast } from "sonner";
 const CourseProgress = () => {
   const params = useParams();
   const courseId = params.courseId;
-  const { data, isLoading, isError, refetch } =
+  const navigate = useNavigate();
+  const [retryOnce, setRetryOnce] = useState(false);
+
+  const { data, isLoading, isError, error, refetch } =
     useGetCourseProgressQuery(courseId);
 
   const [updateLectureProgress] = useUpdateLectureProgressMutation();
@@ -40,6 +43,21 @@ const CourseProgress = () => {
       toast.success(markInCompleteData.message);
     }
   }, [completedSuccess, inCompletedSuccess]);
+
+  useEffect(() => {
+    
+    if (isError && error?.status === 401 && !retryOnce) {
+      setTimeout(() => {
+        refetch(); 
+        setRetryOnce(true);
+      }, 400);
+    }
+
+    
+    if (isError && error?.status === 401 && retryOnce) {
+      navigate("/login");
+    }
+  }, [isError, error, retryOnce]);
 
   const [currentLecture, setCurrentLecture] = useState(null);
 
@@ -68,7 +86,6 @@ const CourseProgress = () => {
     setCurrentLecture(lecture);
     handleLectureProgress(lecture._id);
   };
-
 
   const handleCompleteCourse = async () => {
     await completeCourse(courseId);
