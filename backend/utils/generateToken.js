@@ -7,7 +7,7 @@ export const generateToken = (res , user , message) => {
 
 
     return res.status(200)
-    .cookie("code_cortex_token" , token , {httpOnly:true , sameSite:'none' , maxAge:24*60*60*1000})
+    .cookie("code_cortex_token" , token , {httpOnly:true , sameSite:'none' ,secure:true , maxAge:24*60*60*1000})
     .json({
         success : true,
         message,
