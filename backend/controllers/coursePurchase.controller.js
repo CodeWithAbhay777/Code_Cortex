@@ -73,6 +73,9 @@ export const createCheckoutSession = async (req, res) => {
   }
 };
 
+
+
+
 export const stripeWebhook = async (req, res) => {
   let event;
 
@@ -141,12 +144,15 @@ export const stripeWebhook = async (req, res) => {
   }
   res.status(200).send();
 };
+
+
+
 export const getCourseDetailWithPurchaseStatus = async (req, res) => {
   try {
     const { courseId } = req.params;
     const userId = req.id;
 
-    console.log(userId)
+    
 
     const course = await Course.findById(courseId)
       .populate({ path: "creator" })

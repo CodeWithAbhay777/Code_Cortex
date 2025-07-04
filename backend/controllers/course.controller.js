@@ -33,7 +33,7 @@ export const createCourse = async (req,res) => {
 export const searchCourse = async (req,res) => {
     try {
         const {query = "", categories = [], sortByPrice =""} = req.query;
-        console.log(categories);
+        // console.log(categories);
         
         // create search query
         const searchCriteria = {
@@ -49,6 +49,8 @@ export const searchCourse = async (req,res) => {
         if(categories.length > 0) {
             searchCriteria.category = {$in: categories};
         }
+
+       
 
         // define sorting order
         const sortOptions = {};
